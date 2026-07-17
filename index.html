@@ -1,1 +1,754 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Neural Forge · Generative AI & Software Engineer</title>
+    <!-- Fonts & Icons -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
+        body {
+            background: #0b0d10;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            color: #eef2f6;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        /* ---- gradient & glow ---- */
+        .glow-text {
+            background: linear-gradient(135deg, #a78bfa, #60a5fa, #34d399);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            display: inline-block;
+        }
+
+        .section-badge {
+            display: inline-block;
+            font-size: 0.75rem;
+            font-weight: 600;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: #94a3b8;
+            background: rgba(255, 255, 255, 0.04);
+            padding: 0.3rem 1rem;
+            border-radius: 100px;
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            margin-bottom: 1rem;
+        }
+
+        h2 {
+            font-size: 2.4rem;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            margin-bottom: 0.5rem;
+        }
+
+        /* ---- header / nav ---- */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 50;
+            padding: 1.2rem 0;
+            background: rgba(11, 13, 16, 0.7);
+            backdrop-filter: blur(16px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+        }
+
+        .nav-inner {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-weight: 800;
+            font-size: 1.4rem;
+            letter-spacing: -0.03em;
+            background: linear-gradient(135deg, #c4b5fd, #818cf8);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2.5rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: #cbd5e1;
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+
+        .nav-links a:hover {
+            color: #a78bfa;
+        }
+
+        /* ---- hero ---- */
+        .hero {
+            padding: 8rem 0 5rem;
+            min-height: 90vh;
+            display: flex;
+            align-items: center;
+            position: relative;
+        }
+
+        .hero-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .hero-content h1 {
+            font-size: 3.8rem;
+            font-weight: 800;
+            line-height: 1.1;
+            letter-spacing: -0.03em;
+            margin-bottom: 1rem;
+        }
+
+        .hero-content p {
+            font-size: 1.2rem;
+            color: #94a3b8;
+            max-width: 480px;
+            margin-bottom: 2rem;
+        }
+
+        .hero-cta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #7c3aed, #4f46e5);
+            border: none;
+            padding: 0.75rem 2rem;
+            border-radius: 60px;
+            font-weight: 600;
+            color: white;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 30px -8px rgba(79, 70, 229, 0.4);
+        }
+
+        .btn-outline {
+            background: transparent;
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            padding: 0.75rem 2rem;
+            border-radius: 60px;
+            font-weight: 600;
+            color: #e2e8f0;
+            cursor: pointer;
+            transition: background 0.2s;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .btn-outline:hover {
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .hero-visual {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+        }
+
+        .orb {
+            width: 340px;
+            height: 340px;
+            border-radius: 50%;
+            background: radial-gradient(circle at 30% 30%, rgba(124, 58, 237, 0.3), rgba(79, 70, 229, 0.1));
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            animation: float 6s ease-in-out infinite;
+            box-shadow: 0 0 80px rgba(124, 58, 237, 0.15);
+        }
+
+        .orb-inner {
+            font-size: 5rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #a78bfa, #60a5fa);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            letter-spacing: -0.05em;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-18px); }
+            100% { transform: translateY(0px); }
+        }
+
+        .floating-tag {
+            position: absolute;
+            background: rgba(30, 41, 59, 0.7);
+            backdrop-filter: blur(8px);
+            padding: 0.4rem 1rem;
+            border-radius: 60px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            color: #cbd5e1;
+            white-space: nowrap;
+        }
+
+        .tag-1 { top: 10%; left: -5%; }
+        .tag-2 { bottom: 10%; right: -5%; }
+
+        /* ---- section common ---- */
+        section {
+            padding: 5rem 0;
+            border-top: 1px solid rgba(255, 255, 255, 0.04);
+        }
+
+        .section-header {
+            margin-bottom: 3rem;
+        }
+
+        /* ---- skills grid (icon + label) ---- */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 2rem 1.5rem;
+            margin-top: 1.5rem;
+        }
+
+        .skill-item {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 24px;
+            padding: 1.5rem 0.5rem;
+            text-align: center;
+            transition: background 0.2s, transform 0.2s;
+        }
+
+        .skill-item:hover {
+            background: rgba(255, 255, 255, 0.05);
+            transform: translateY(-4px);
+        }
+
+        .skill-item i {
+            font-size: 2.4rem;
+            color: #a78bfa;
+            margin-bottom: 0.5rem;
+        }
+
+        .skill-item span {
+            display: block;
+            font-size: 0.85rem;
+            font-weight: 500;
+            color: #e2e8f0;
+        }
+
+        /* ---- projects ---- */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+
+        .project-card {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 28px;
+            padding: 1.8rem 1.5rem;
+            transition: background 0.2s, transform 0.2s, border-color 0.2s;
+        }
+
+        .project-card:hover {
+            background: rgba(255, 255, 255, 0.04);
+            transform: translateY(-6px);
+            border-color: rgba(124, 58, 237, 0.3);
+        }
+
+        .project-icon {
+            font-size: 1.8rem;
+            color: #818cf8;
+            margin-bottom: 0.8rem;
+        }
+
+        .project-card h3 {
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 0.3rem;
+        }
+
+        .project-card p {
+            color: #94a3b8;
+            font-size: 0.95rem;
+            margin-bottom: 1.2rem;
+        }
+
+        .project-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.4rem;
+        }
+
+        .project-tags span {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 0.2rem 0.8rem;
+            border-radius: 40px;
+            font-size: 0.7rem;
+            font-weight: 500;
+            color: #94a3b8;
+            letter-spacing: 0.02em;
+        }
+
+        .project-link {
+            display: inline-block;
+            margin-top: 1.2rem;
+            color: #a78bfa;
+            font-weight: 600;
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: color 0.2s;
+        }
+
+        .project-link i {
+            margin-left: 0.3rem;
+            transition: transform 0.2s;
+        }
+
+        .project-link:hover {
+            color: #c4b5fd;
+        }
+
+        .project-link:hover i {
+            transform: translateX(4px);
+        }
+
+        /* ---- about / stats ---- */
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: start;
+        }
+
+        .about-text p {
+            color: #cbd5e1;
+            margin-bottom: 1rem;
+        }
+
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1rem;
+        }
+
+        .stat-item {
+            background: rgba(255, 255, 255, 0.02);
+            border-radius: 20px;
+            padding: 1.5rem 0.5rem;
+            text-align: center;
+            border: 1px solid rgba(255, 255, 255, 0.04);
+        }
+
+        .stat-number {
+            font-size: 2.2rem;
+            font-weight: 800;
+            color: #a78bfa;
+        }
+
+        .stat-label {
+            font-size: 0.8rem;
+            color: #94a3b8;
+        }
+
+        /* ---- contact ---- */
+        .contact-links {
+            display: flex;
+            gap: 2rem;
+            flex-wrap: wrap;
+            margin-top: 1.5rem;
+        }
+
+        .contact-links a {
+            color: #cbd5e1;
+            text-decoration: none;
+            font-size: 1.1rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.6rem;
+            transition: color 0.2s;
+        }
+
+        .contact-links a:hover {
+            color: #a78bfa;
+        }
+
+        /* ---- footer ---- */
+        .footer {
+            padding: 2.5rem 0;
+            border-top: 1px solid rgba(255, 255, 255, 0.04);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+            color: #64748b;
+            font-size: 0.9rem;
+        }
+
+        /* ---- responsive ---- */
+        @media (max-width: 900px) {
+            .hero-grid {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+            .hero-content p {
+                margin-left: auto;
+                margin-right: auto;
+            }
+            .hero-cta {
+                justify-content: center;
+            }
+            .hero-visual {
+                order: -1;
+            }
+            .orb {
+                width: 220px;
+                height: 220px;
+            }
+            .orb-inner {
+                font-size: 3rem;
+            }
+            .tag-1, .tag-2 {
+                display: none;
+            }
+            .about-grid {
+                grid-template-columns: 1fr;
+            }
+            .stats {
+                grid-template-columns: repeat(3, 1fr);
+            }
+            h2 {
+                font-size: 2rem;
+            }
+            .nav-links {
+                gap: 1.5rem;
+            }
+        }
+
+        @media (max-width: 500px) {
+            .nav-links {
+                gap: 0.8rem;
+                font-size: 0.8rem;
+            }
+            .hero-content h1 {
+                font-size: 2.4rem;
+            }
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* small extra glow */
+        .glow-border {
+            border-image: linear-gradient(135deg, #7c3aed20, #4f46e520) 1;
+        }
+
+        ::selection {
+            background: #7c3aed;
+            color: white;
+        }
+
+        /* custom scroll */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #0b0d10;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #2d2f3a;
+            border-radius: 8px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #4f46e5;
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="container nav-inner">
+            <span class="logo">⚡ neural forge</span>
+            <ul class="nav-links">
+                <li><a href="#about">About</a></li>
+                <li><a href="#skills">Skills</a></li>
+                <li><a href="#projects">Work</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- HERO -->
+    <section class="hero" id="home">
+        <div class="container hero-grid">
+            <div class="hero-content">
+                <span class="section-badge"><i class="fas fa-brain" style="margin-right: 6px;"></i> Generative AI · Software</span>
+                <h1>
+                    <span class="glow-text">Building</span><br>
+                    the next generation<br>
+                    of intelligent systems
+                </h1>
+                <p>Generative AI & full-stack engineer. I craft human-centered AI experiences and robust software — from LLM agents to immersive web applications.</p>
+                <div class="hero-cta">
+                    <a href="#projects" class="btn-primary"><i class="fas fa-arrow-right"></i> See my work</a>
+                    <a href="#contact" class="btn-outline"><i class="fas fa-paper-plane"></i> Connect</a>
+                </div>
+            </div>
+            <div class="hero-visual">
+                <div class="orb">
+                    <span class="orb-inner">AI</span>
+                </div>
+                <span class="floating-tag tag-1"><i class="fas fa-robot"></i> LLM · RAG</span>
+                <span class="floating-tag tag-2"><i class="fas fa-code"></i> full-stack</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- ABOUT -->
+    <section id="about">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-badge">about</span>
+                <h2>Crafting <span class="glow-text">intelligence</span> with purpose</h2>
+            </div>
+            <div class="about-grid">
+                <div class="about-text">
+                    <p>I’m a Generative AI & Software Engineer with a passion for turning complex models into tangible, user‑friendly products. I’ve built agents, fine‑tuned LLMs, and designed scalable backends — always with a focus on real‑world impact.</p>
+                    <p>Beyond the hype, I believe in responsible AI, clean code, and continuous learning. Currently exploring multi‑modal systems, reasoning agents, and developer tooling.</p>
+                </div>
+                <div class="stats">
+                    <div class="stat-item">
+                        <div class="stat-number">3+</div>
+                        <div class="stat-label">years AI/ML</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">12</div>
+                        <div class="stat-label">projects shipped</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">6</div>
+                        <div class="stat-label">LLM agents built</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SKILLS -->
+    <section id="skills">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-badge">toolbox</span>
+                <h2><span class="glow-text">Skills</span> & technologies</h2>
+            </div>
+            <div class="skills-grid">
+                <div class="skill-item"><i class="fab fa-python"></i><span>Python</span></div>
+                <div class="skill-item"><i class="fas fa-robot"></i><span>PyTorch</span></div>
+                <div class="skill-item"><i class="fas fa-code"></i><span>LangChain</span></div>
+                <div class="skill-item"><i class="fas fa-database"></i><span>Vector DB</span></div>
+                <div class="skill-item"><i class="fab fa-js"></i><span>TypeScript</span></div>
+                <div class="skill-item"><i class="fab fa-react"></i><span>React · Next</span></div>
+                <div class="skill-item"><i class="fas fa-cloud"></i><span>AWS · GCP</span></div>
+                <div class="skill-item"><i class="fas fa-server"></i><span>FastAPI</span></div>
+                <div class="skill-item"><i class="fab fa-docker"></i><span>Docker</span></div>
+                <div class="skill-item"><i class="fas fa-arrow-trend-up"></i><span>Fine-tuning</span></div>
+                <div class="skill-item"><i class="fas fa-brain"></i><span>RAG · Agents</span></div>
+                <div class="skill-item"><i class="fas fa-code-branch"></i><span>Git · CI/CD</span></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- PROJECTS -->
+    <section id="projects">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-badge">portfolio</span>
+                <h2>Selected <span class="glow-text">projects</span></h2>
+            </div>
+            <div class="projects-grid">
+                <!-- card 1 -->
+                <div class="project-card">
+                    <div class="project-icon"><i class="fas fa-comment-dots"></i></div>
+                    <h3>DocMind · RAG assistant</h3>
+                    <p>Enterprise document Q&A with hybrid search, fine‑tuned embeddings, and chain‑of‑thought reasoning.</p>
+                    <div class="project-tags">
+                        <span>LangChain</span><span>Pinecone</span><span>FastAPI</span>
+                    </div>
+                    <a href="#" class="project-link">case study <i class="fas fa-arrow-right"></i></a>
+                </div>
+                <!-- card 2 -->
+                <div class="project-card">
+                    <div class="project-icon"><i class="fas fa-paint-brush"></i></div>
+                    <h3>GenArt · diffusion UI</h3>
+                    <p>Web interface for Stable Diffusion with LoRA adapters, real‑time style transfer, and prompt engineering.</p>
+                    <div class="project-tags">
+                        <span>Diffusers</span><span>React</span><span>Next</span>
+                    </div>
+                    <a href="#" class="project-link">live demo <i class="fas fa-arrow-right"></i></a>
+                </div>
+                <!-- card 3 -->
+                <div class="project-card">
+                    <div class="project-icon"><i class="fas fa-robot"></i></div>
+                    <h3>AgentForge · multi‑agent</h3>
+                    <p>Orchestration framework for autonomous AI agents with tool calling, memory, and self‑reflection.</p>
+                    <div class="project-tags">
+                        <span>OpenAI</span><span>LangGraph</span><span>Docker</span>
+                    </div>
+                    <a href="#" class="project-link">github <i class="fas fa-arrow-right"></i></a>
+                </div>
+                <!-- card 4 -->
+                <div class="project-card">
+                    <div class="project-icon"><i class="fas fa-database"></i></div>
+                    <h3>Vectra · vector search</h3>
+                    <p>High‑performance similarity search service with hybrid ranking, built for semantic retrieval at scale.</p>
+                    <div class="project-tags">
+                        <span>Qdrant</span><span>FastAPI</span><span>Pydantic</span>
+                    </div>
+                    <a href="#" class="project-link">read more <i class="fas fa-arrow-right"></i></a>
+                </div>
+                <!-- card 5 -->
+                <div class="project-card">
+                    <div class="project-icon"><i class="fas fa-chart-line"></i></div>
+                    <h3>ML observability</h3>
+                    <p>Dashboard for monitoring model drift, performance, and data quality in production pipelines.</p>
+                    <div class="project-tags">
+                        <span>Grafana</span><span>Prometheus</span><span>Python</span>
+                    </div>
+                    <a href="#" class="project-link">demo <i class="fas fa-arrow-right"></i></a>
+                </div>
+                <!-- card 6 -->
+                <div class="project-card">
+                    <div class="project-icon"><i class="fas fa-code"></i></div>
+                    <h3>CodeWhisper · AI pair</h3>
+                    <p>VS Code extension that provides contextual code suggestions and unit test generation using LLMs.</p>
+                    <div class="project-tags">
+                        <span>TypeScript</span><span>VSCode API</span><span>OpenAI</span>
+                    </div>
+                    <a href="#" class="project-link">extension <i class="fas fa-arrow-right"></i></a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact">
+        <div class="container" style="text-align: center;">
+            <span class="section-badge">connect</span>
+            <h2 style="margin-bottom: 0.5rem;">Let’s <span class="glow-text">build</span> something remarkable</h2>
+            <p style="color: #94a3b8; max-width: 500px; margin: 0 auto 2rem;">I’m open to collaborations, research roles, and engineering challenges that push AI forward.</p>
+            <div class="contact-links" style="justify-content: center;">
+                <a href="#"><i class="fab fa-github"></i> github</a>
+                <a href="#"><i class="fab fa-linkedin-in"></i> linkedin</a>
+                <a href="#"><i class="fab fa-twitter"></i> twitter</a>
+                <a href="#"><i class="fas fa-envelope"></i> email</a>
+                <a href="#"><i class="fas fa-file-pdf"></i> resume</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="container footer">
+        <span>© 2026 Neural Forge · built with <i class="fas fa-heart" style="color: #a78bfa; margin: 0 4px;"></i> for the future</span>
+        <span style="display: flex; gap: 1.5rem;">
+            <a href="#" style="color: #64748b; text-decoration: none;">imprint</a>
+            <a href="#" style="color: #64748b; text-decoration: none;">privacy</a>
+        </span>
+    </footer>
+
+    <!-- subtle floating particle effect (simple) -->
+    <script>
+        (function() {
+            const canvas = document.createElement('canvas');
+            canvas.style.position = 'fixed';
+            canvas.style.top = '0';
+            canvas.style.left = '0';
+            canvas.style.width = '100%';
+            canvas.style.height = '100%';
+            canvas.style.pointerEvents = 'none';
+            canvas.style.zIndex = '-1';
+            document.body.prepend(canvas);
+            const ctx = canvas.getContext('2d');
+
+            function resize() {
+                canvas.width = window.innerWidth;
+                canvas.height = window.innerHeight;
+            }
+            window.addEventListener('resize', resize);
+            resize();
+
+            const particles = [];
+            const count = 70;
+            for (let i = 0; i < count; i++) {
+                particles.push({
+                    x: Math.random() * canvas.width,
+                    y: Math.random() * canvas.height,
+                    r: Math.random() * 1.5 + 0.5,
+                    dx: (Math.random() - 0.5) * 0.3,
+                    dy: (Math.random() - 0.5) * 0.3,
+                });
+            }
+
+            function draw() {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                for (const p of particles) {
+                    ctx.beginPath();
+                    ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+                    ctx.fillStyle = 'rgba(167, 139, 250, 0.25)';
+                    ctx.fill();
+                    p.x += p.dx;
+                    p.y += p.dy;
+                    if (p.x < 0 || p.x > canvas.width) p.dx *= -1;
+                    if (p.y < 0 || p.y > canvas.height) p.dy *= -1;
+                }
+                requestAnimationFrame(draw);
+            }
+            draw();
+        })();
+    </script>
+</body>
+</html>
