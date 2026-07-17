@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Projects · Neural Forge</title>
+    <!-- Google Fonts: Syne + Space Mono -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;700;800&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet" />
+    <!-- Font Awesome (optional icons) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+    <style>
+        /* ----- GLOBAL RESET & VARIABLES (matches your previous theme) ----- */
+        :root {
+            --bg:        #080b10;
+            --bg2:       #0d1117;
+            --border:    rgba(0, 200, 255, 0.12);
+            --accent:    #00c8ff;
+            --accent2:   #7b2fff;
+            --text:      #c9d4e0;
+            --text-dim:  #5a6a7a;
+            --white:     #eef2f7;
+            --font-head: 'Syne', sans-serif;
+            --font-mono: 'Space Mono', monospace;
+        }
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+        html { scroll-behavior: smooth; }
+        body {
+            background: var(--bg);
+            color: var(--text);
+            font-family: var(--font-mono);
+            font-size: 15px;
+            line-height: 1.7;
+            overflow-x: hidden;
+        }
+        a { color: var(--accent); text-decoration: none; transition: 0.2s; }
+        a:hover { color: var(--white); }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        /* ----- NAV (minimal) ----- */
+        nav {
+            position: fixed;
+            top: 0; left: 0; right: 0;
+            z-index: 100;
+            background: rgba(8,11,16,0.85);
+            backdrop-filter: blur(14px);
+            border-bottom: 1px solid var(--border);
+            padding: 1.2rem 0;
+        }
+        .nav-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .nav-logo {
+            font-family: var(--font-head);
+            font-weight: 800;
+            font-size: 1.3rem;
+            color: var(--accent);
+            letter-spacing: 0.1em;
+        }
+        .back-link {
+            color: var(--text-dim);
+            font-size: 0.85rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            transition: color 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        .back-link:hover { color: var(--accent); }
+
+        /* ----- PROJECT GRID HEADER ----- */
+        .page-header {
+            padding: 120px 0 40px;
+            text-align: center;
+        }
+        .page-header h1 {
+            font-family: var(--font-head);
+            font-size: clamp(2.2rem, 5vw, 3.8rem);
+            font-weight: 800;
+            color: var(--white);
+            margin-bottom: 0.5rem;
+        }
+        .page-header .accent { color: var(--accent); }
+        .page-header p {
+            color: var(--text-dim);
+            max-width: 600px;
+            margin: 0 auto;
+            font-size: 1rem;
+        }
+
+        /* ----- CUSTOMIZABLE PROJECT GRID ----- */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 2rem;
+            padding: 2rem 0 5rem;
+        }
+
+        /* Each project card — matches the style of your previous "project-card" */
+        .project-card {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid var(--border);
+            border-radius: 28px;
+            padding: 1.8rem 1.5rem;
+            transition: background 0.2s, transform 0.2s, border-color 0.2s;
+            display: flex;
+            flex-direction: column;
+        }
+        .project-card:hover {
+            background: rgba(255, 255, 255, 0.04);
+            transform: translateY(-6px);
+            border-color: rgba(0, 200, 255, 0.3);
+        }
+        .project-icon {
+            font-size: 2rem;
+            color: var(--accent);
+            margin-bottom: 0.8rem;
+        }
+        .project-card h3 {
+            font-family: var(--font-head);
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: var(--white);
+            margin-bottom: 0.4rem;
+        }
+        .project-card p {
+            color: var(--text-dim);
+            font-size: 0.95rem;
+            margin-bottom: 1.2rem;
+            flex: 1;
+        }
+        .project-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.4rem;
+            margin-bottom: 1.2rem;
+        }
+        .project-tags span {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 0.2rem 0.8rem;
+            border-radius: 40px;
+            font-size: 0.7rem;
+            font-weight: 500;
+            color: var(--text-dim);
+            letter-spacing: 0.02em;
+            border: 1px solid rgba(255,255,255,0.04);
+        }
+        .project-link {
+            font-weight: 600;
+            font-size: 0.9rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            transition: gap 0.2s;
+            margin-top: auto;
+        }
+        .project-link i { transition: transform 0.2s; }
+        .project-link:hover i { transform: translateX(4px); }
+
+        /* ----- IMAGE PLACEHOLDER (replace with your own) ----- */
+        .project-img-placeholder {
+            width: 100%;
+            aspect-ratio: 16 / 9;
+            background: var(--bg2);
+            border: 1px dashed var(--border);
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-dim);
+            font-size: 0.75rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            margin-bottom: 1.2rem;
+            transition: border-color 0.3s;
+        }
+        .project-card:hover .project-img-placeholder {
+            border-color: var(--accent);
+        }
+        .project-img-placeholder i {
+            font-size: 2rem;
+            margin-right: 0.6rem;
+            opacity: 0.3;
+        }
+
+        /* ----- RESPONSIVE ----- */
+        @media (max-width: 768px) {
+            .projects-grid { grid-template-columns: 1fr; }
+        }
+        @media (max-width: 480px) {
+            .container { padding: 0 1.2rem; }
+        }
+
+        /* ----- UTILITY (accent) ----- */
+        .accent { color: var(--accent); }
+    </style>
+</head>
+<body>
+
+    <!-- ===== NAV ===== -->
+    <nav>
+        <div class="nav-inner">
+            <a href="../index.html" class="back-link"><i class="fas fa-arrow-left"></i> back</a>
+            <span class="nav-logo">⚡ neural forge</span>
+        </div>
+    </nav>
+
+    <!-- ===== PAGE HEADER ===== -->
+    <section class="page-header">
+        <div class="container">
+            <h1>Selected <span class="accent">Projects</span></h1>
+            <p>A curated collection of generative AI, immersive experiences, and full‑stack tools.</p>
+        </div>
+    </section>
+
+    <!-- ===== PROJECT GRID (customise each card) ===== -->
+    <section>
+        <div class="container">
+            <div class="projects-grid">
+
+                <!-- 1️⃣ PROJECT CARD – copy/paste this block to add more -->
+                <div class="project-card">
+                    <div class="project-img-placeholder">
+                        <i class="fas fa-robot"></i> Add image
+                    </div>
+                    <div class="project-icon"><i class="fas fa-comment-dots"></i></div>
+                    <h3>DocMind · RAG assistant</h3>
+                    <p>Enterprise document Q&A with hybrid search, fine‑tuned embeddings, and chain‑of‑thought reasoning.</p>
+                    <div class="project-tags">
+                        <span>LangChain</span>
+                        <span>Pinecone</span>
+                        <span>FastAPI</span>
+                    </div>
+                    <a href="#" class="project-link">case study <i class="fas fa-arrow-right"></i></a>
+                </div>
+
+                <!-- 2️⃣ -->
+                <div class="project-card">
+                    <div class="project-img-placeholder">
+                        <i class="fas fa-paint-brush"></i> Add image
+                    </div>
+                    <div class="project-icon"><i class="fas fa-palette"></i></div>
+                    <h3>GenArt · diffusion UI</h3>
+                    <p>Web interface for Stable Diffusion with LoRA adapters, real‑time style transfer, and prompt engineering.</p>
+                    <div class="project-tags">
+                        <span>Diffusers</span>
+                        <span>React</span>
+                        <span>Next</span>
+                    </div>
+                    <a href="#" class="project-link">live demo <i class="fas fa-arrow-right"></i></a>
+                </div>
+
+                <!-- 3️⃣ -->
+                <div class="project-card">
+                    <div class="project-img-placeholder">
+                        <i class="fas fa-robot"></i> Add image
+                    </div>
+                    <div class="project-icon"><i class="fas fa-network-wired"></i></div>
+                    <h3>AgentForge · multi‑agent</h3>
+                    <p>Orchestration framework for autonomous AI agents with tool calling, memory, and self‑reflection.</p>
+                    <div class="project-tags">
+                        <span>OpenAI</span>
+                        <span>LangGraph</span>
+                        <span>Docker</span>
+                    </div>
+                    <a href="#" class="project-link">github <i class="fas fa-arrow-right"></i></a>
+                </div>
+
+                <!-- 4️⃣ -->
+                <div class="project-card">
+                    <div class="project-img-placeholder">
+                        <i class="fas fa-database"></i> Add image
+                    </div>
+                    <div class="project-icon"><i class="fas fa-magnifying-glass"></i></div>
+                    <h3>Vectra · vector search</h3>
+                    <p>High‑performance similarity search service with hybrid ranking, built for semantic retrieval at scale.</p>
+                    <div class="project-tags">
+                        <span>Qdrant</span>
+                        <span>FastAPI</span>
+                        <span>Pydantic</span>
+                    </div>
+                    <a href="#" class="project-link">read more <i class="fas fa-arrow-right"></i></a>
+                </div>
+
+                <!-- 5️⃣ -->
+                <div class="project-card">
+                    <div class="project-img-placeholder">
+                        <i class="fas fa-chart-line"></i> Add image
+                    </div>
+                    <div class="project-icon"><i class="fas fa-chart-simple"></i></div>
+                    <h3>ML observability</h3>
+                    <p>Dashboard for monitoring model drift, performance, and data quality in production pipelines.</p>
+                    <div class="project-tags">
+                        <span>Grafana</span>
+                        <span>Prometheus</span>
+                        <span>Python</span>
+                    </div>
+                    <a href="#" class="project-link">demo <i class="fas fa-arrow-right"></i></a>
+                </div>
+
+                <!-- 6️⃣ -->
+                <div class="project-card">
+                    <div class="project-img-placeholder">
+                        <i class="fas fa-code"></i> Add image
+                    </div>
+                    <div class="project-icon"><i class="fas fa-robot"></i></div>
+                    <h3>CodeWhisper · AI pair</h3>
+                    <p>VS Code extension that provides contextual code suggestions and unit test generation using LLMs.</p>
+                    <div class="project-tags">
+                        <span>TypeScript</span>
+                        <span>VSCode API</span>
+                        <span>OpenAI</span>
+                    </div>
+                    <a href="#" class="project-link">extension <i class="fas fa-arrow-right"></i></a>
+                </div>
+
+                <!-- 7️⃣ – add your own custom project -->
+                <div class="project-card">
+                    <div class="project-img-placeholder">
+                        <i class="fas fa-vr-cardboard"></i> Add image
+                    </div>
+                    <div class="project-icon"><i class="fas fa-vr-cardboard"></i></div>
+                    <h3>Immersive XR · medical</h3>
+                    <p>CAVE‑based surgical simulation with real‑time haptics and volumetric rendering.</p>
+                    <div class="project-tags">
+                        <span>Unity</span>
+                        <span>VR</span>
+                        <span>C#</span>
+                    </div>
+                    <a href="#" class="project-link">view project <i class="fas fa-arrow-right"></i></a>
+                </div>
+
+                <!-- 8️⃣ -->
+                <div class="project-card">
+                    <div class="project-img-placeholder">
+                        <i class="fas fa-arrows-spin"></i> Add image
+                    </div>
+                    <div class="project-icon"><i class="fas fa-cogs"></i></div>
+                    <h3>Forward Kinematics · robotic arm</h3>
+                    <p>Interactive simulation of a 6‑DOF robotic arm using Denavit‑Hartenberg parameters.</p>
+                    <div class="project-tags">
+                        <span>Unity</span>
+                        <span>C#</span>
+                        <span>Robotics</span>
+                    </div>
+                    <a href="#" class="project-link">simulation <i class="fas fa-arrow-right"></i></a>
+                </div>
+
+            </div> <!-- /projects-grid -->
+        </div> <!-- /container -->
+    </section>
+
+    <!-- ===== FOOTER ===== -->
+    <footer style="border-top:1px solid var(--border); padding: 2rem 0; text-align: center; color: var(--text-dim); font-size:0.85rem;">
+        <div class="container">
+            <span>© 2026 Neural Forge · built with <i class="fas fa-heart" style="color: var(--accent);"></i> for innovation</span>
+        </div>
+    </footer>
+
+    <!-- simple script to keep the "accent" feel – nothing fancy -->
+    <script>
+        console.log('✨ Customise your projects – edit the .project-card blocks inside .projects-grid');
+    </script>
+
+</body>
+</html>
