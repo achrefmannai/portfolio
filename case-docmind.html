@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>DocMind · RAG assistant — Case Study</title>
+    <title>Prompt to SQL · Case Study</title>
     <!-- Fonts & Icons -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -30,7 +30,6 @@
             padding: 0 2rem;
         }
 
-        /* glow & badges */
         .glow-text {
             background: linear-gradient(135deg, #a78bfa, #60a5fa, #34d399);
             -webkit-background-clip: text;
@@ -88,7 +87,6 @@
             color: #cbd5e1;
         }
 
-        /* ---- navigation ---- */
         nav {
             position: fixed;
             top: 0;
@@ -133,7 +131,6 @@
             color: #a78bfa;
         }
 
-        /* ---- hero case ---- */
         .case-hero {
             padding: 8rem 0 3rem;
         }
@@ -166,7 +163,6 @@
             width: 1.2rem;
         }
 
-        /* ---- cover image placeholder ---- */
         .cover {
             background: radial-gradient(circle at 20% 30%, rgba(124, 58, 237, 0.2), rgba(11, 13, 16, 0.9));
             border: 1px solid rgba(255, 255, 255, 0.06);
@@ -195,7 +191,6 @@
             color: #94a3b8;
         }
 
-        /* ---- content grid ---- */
         .content-grid {
             display: grid;
             grid-template-columns: 2fr 1fr;
@@ -284,7 +279,36 @@
             color: #e2e8f0;
         }
 
-        /* ---- gallery / images ---- */
+        .sql-preview {
+            background: #0e1a2b;
+            border-radius: 16px;
+            padding: 1.2rem 1.5rem;
+            overflow-x: auto;
+            margin: 1.5rem 0;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            font-family: 'JetBrains Mono', 'Fira Code', monospace;
+            font-size: 0.8rem;
+            line-height: 1.7;
+            color: #d4e2ff;
+        }
+
+        .sql-preview .key { color: #f472b6; }
+        .sql-preview .string { color: #6ee7b7; }
+        .sql-preview .comment { color: #64748b; }
+        .sql-preview .keyword { color: #818cf8; }
+
+        .prompt-box {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            border-radius: 16px;
+            padding: 1.2rem 1.5rem;
+            margin: 1rem 0;
+            font-family: 'JetBrains Mono', 'Fira Code', monospace;
+            font-size: 0.85rem;
+            color: #cbd5e1;
+            white-space: pre-wrap;
+        }
+
         .gallery {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -318,7 +342,6 @@
             background: rgba(255, 255, 255, 0.04);
         }
 
-        /* ---- back to projects ---- */
         .back-section {
             text-align: center;
             padding: 3rem 0 1rem;
@@ -338,7 +361,6 @@
             color: #a78bfa;
         }
 
-        /* ---- footer ---- */
         .footer {
             padding: 2.5rem 0;
             border-top: 1px solid rgba(255, 255, 255, 0.04);
@@ -351,7 +373,6 @@
             font-size: 0.9rem;
         }
 
-        /* ---- responsive ---- */
         @media (max-width: 850px) {
             .content-grid {
                 grid-template-columns: 1fr;
@@ -377,9 +398,6 @@
             }
             .cover h2 {
                 font-size: 1.5rem;
-            }
-            .stat-row {
-                flex-wrap: wrap;
             }
         }
 
@@ -418,26 +436,26 @@
 
             <div class="case-header">
                 <div>
-                    <span class="section-badge"><i class="fas fa-comment-dots" style="margin-right: 6px;"></i> case study</span>
-                    <h1>DocMind · <span class="glow-text">RAG assistant</span></h1>
+                    <span class="section-badge"><i class="fas fa-code" style="margin-right: 6px;"></i> case study</span>
+                    <h1>Prompt → <span class="glow-text">SQL Schema</span></h1>
                 </div>
                 <div class="case-meta">
                     <span class="case-meta-item"><i class="fas fa-calendar-alt"></i> 2025</span>
-                    <span class="case-meta-item"><i class="fas fa-users"></i> team of 2</span>
-                    <span class="case-meta-item"><i class="fas fa-tag"></i> production</span>
+                    <span class="case-meta-item"><i class="fas fa-users"></i> solo project</span>
+                    <span class="case-meta-item"><i class="fas fa-tag"></i> research</span>
                 </div>
             </div>
 
             <!-- Cover -->
             <div class="cover">
-                <div class="icon-big"><i class="fas fa-comment-dots"></i></div>
-                <h2>Enterprise document <span class="glow-text">Q&A</span> at scale</h2>
-                <p>Hybrid search, fine‑tuned embeddings, and chain‑of‑thought reasoning over thousands of internal documents.</p>
+                <div class="icon-big"><i class="fas fa-database"></i></div>
+                <h2>From <span class="glow-text">natural language</span> to relational schema</h2>
+                <p>Automatic generation of SQL schemas from simple user prompts using LLMs, RAG, and reasoning architectures.</p>
                 <div style="margin-top: 1.2rem; display: flex; flex-wrap: wrap; gap: 0.5rem; justify-content: center;">
+                    <span class="badge-tech"><i class="fas fa-check-circle" style="margin-right: 4px;"></i> LLM</span>
                     <span class="badge-tech"><i class="fas fa-check-circle" style="margin-right: 4px;"></i> RAG</span>
-                    <span class="badge-tech"><i class="fas fa-check-circle" style="margin-right: 4px;"></i> LangChain</span>
-                    <span class="badge-tech"><i class="fas fa-check-circle" style="margin-right: 4px;"></i> Pinecone</span>
-                    <span class="badge-tech"><i class="fas fa-check-circle" style="margin-right: 4px;"></i> FastAPI</span>
+                    <span class="badge-tech"><i class="fas fa-check-circle" style="margin-right: 4px;"></i> Reasoning</span>
+                    <span class="badge-tech"><i class="fas fa-check-circle" style="margin-right: 4px;"></i> Prompt Engineering</span>
                 </div>
             </div>
 
@@ -447,46 +465,95 @@
                 <div class="main-col">
                     <h2>Overview</h2>
                     <p>
-                        DocMind is a generative AI assistant that enables natural language querying over a company’s internal knowledge base. It combines semantic retrieval with generative reasoning to deliver accurate, contextual answers — complete with source citations.
+                        This project demonstrates how generative AI can interpret a simple natural language request and automatically produce a fully structured SQL schema with proper constraints, primary keys, and relationships.
                     </p>
                     <p>
-                        The system ingests PDFs, Word docs, and markdown files, chunks them intelligently, and stores embeddings in a vector database. At query time, it retrieves the most relevant passages, then uses a chain‑of‑thought prompt to synthesize a final answer.
+                        The system takes a prompt like <em>"Create a database. Each user has name, age, profession. Each user has credentials (username, password)"</em> and generates a complete JSON representation of the database schema — including tables, columns, data types, constraints, and foreign key relationships.
                     </p>
 
-                    <h2 style="margin-top: 1.8rem;">Key features</h2>
+                    <h2 style="margin-top: 1.8rem;">The Prompt</h2>
+                    <div class="prompt-box">
+                        <span style="color: #6ee7b7;">"Create a database.</span>
+                        <span style="color: #6ee7b7;"></span>
+                        <span style="color: #6ee7b7;">Each user has</span>
+                        <span style="color: #6ee7b7;">- name</span>
+                        <span style="color: #6ee7b7;">- age</span>
+                        <span style="color: #6ee7b7;">- profession</span>
+                        <span style="color: #6ee7b7;"></span>
+                        <span style="color: #6ee7b7;">Each user has credentials</span>
+                        <span style="color: #6ee7b7;">- username</span>
+                        <span style="color: #6ee7b7;">- password"</span>
+                    </div>
+
+                    <h2 style="margin-top: 1.8rem;">Generated Schema</h2>
+                    <div class="sql-preview">
+                        <span class="comment">// Generated output</span><br />
+                        {<br />
+                        &nbsp;&nbsp;"database": "UserDatabase",<br />
+                        &nbsp;&nbsp;"tables": [<br />
+                        &nbsp;&nbsp;&nbsp;&nbsp;{<br />
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"table_name": "Users",<br />
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"columns": [<br />
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{"column_name": "user_id", "data_type": "INT", "constraints": [<span class="string">"PRIMARY KEY"</span>]},<br />
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{"column_name": "name", "data_type": "VARCHAR(255)"},<br />
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{"column_name": "age", "data_type": "INT"},<br />
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{"column_name": "profession", "data_type": "VARCHAR(255)"}<br />
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;]<br />
+                        &nbsp;&nbsp;&nbsp;&nbsp;},<br />
+                        &nbsp;&nbsp;&nbsp;&nbsp;{<br />
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"table_name": "Credentials",<br />
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"columns": [<br />
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{"column_name": "credential_id", "data_type": "INT", "constraints": [<span class="string">"PRIMARY KEY"</span>]},<br />
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{"column_name": "username", "data_type": "VARCHAR(255)", "constraints": [<span class="string">"UNIQUE"</span>]},<br />
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{"column_name": "password", "data_type": "VARCHAR(255)"}<br />
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;],<br />
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"relationships": [<br />
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{<br />
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"relationship_type": "one-to-one",<br />
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"primary_key": "credential_id",<br />
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"foreign_key": "user_id",<br />
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"referenced_table": "Users"<br />
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br />
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;]<br />
+                        &nbsp;&nbsp;&nbsp;&nbsp;}<br />
+                        &nbsp;&nbsp;]<br />
+                        }
+                    </div>
+
+                    <h2 style="margin-top: 1.8rem;">Key Features</h2>
                     <ul>
-                        <li><i class="fas fa-check-circle"></i> Hybrid search (dense + sparse) for higher recall</li>
-                        <li><i class="fas fa-check-circle"></i> Fine‑tuned embeddings on domain‑specific corpora</li>
-                        <li><i class="fas fa-check-circle"></i> Chain‑of‑thought reasoning with source attribution</li>
-                        <li><i class="fas fa-check-circle"></i> Async ingestion pipeline with progress tracking</li>
-                        <li><i class="fas fa-check-circle"></i> REST API with streaming responses</li>
+                        <li><i class="fas fa-check-circle"></i> Automatic inference of primary keys and foreign keys</li>
+                        <li><i class="fas fa-check-circle"></i> Detection of uniqueness constraints (UNIQUE)</li>
+                        <li><i class="fas fa-check-circle"></i> Relationship mapping (one-to-one, one-to-many, many-to-many)</li>
+                        <li><i class="fas fa-check-circle"></i> Appropriate data type selection based on intent</li>
+                        <li><i class="fas fa-check-circle"></i> Structured JSON output ready for integration</li>
                     </ul>
 
-                    <h2 style="margin-top: 1.8rem;">Architecture</h2>
+                    <h2 style="margin-top: 1.8rem;">How It Works</h2>
                     <p>
-                        The backend is built with <strong>FastAPI</strong> and <strong>LangChain</strong>, using <strong>Pinecone</strong> as the vector store. Document ingestion is handled by a background worker that splits, embeds, and indexes content. The frontend is a lightweight React dashboard that streams answers in real time.
+                        The system uses a <strong>RAG architecture</strong> combined with a <strong>reasoning model</strong> to interpret the user's intent. It identifies entities, attributes, and relationships from the natural language prompt, then applies database design best practices to generate a coherent schema.
                     </p>
                     <p>
-                        We also implemented a caching layer and query routing to reduce latency, and added feedback loops to continuously improve retrieval quality.
+                        The model infers that "user" is an entity, "name/age/profession" are attributes, and "credentials" is a related entity with a one-to-one relationship. It automatically assigns a primary key to each table and links them appropriately.
                     </p>
 
                     <!-- gallery -->
                     <div class="gallery">
                         <div class="gallery-item">
-                            <i class="fas fa-search"></i>
-                            <span>Semantic search interface</span>
+                            <i class="fas fa-comment"></i>
+                            <span>Natural language input</span>
                         </div>
                         <div class="gallery-item">
-                            <i class="fas fa-chart-pie"></i>
-                            <span>Retrieval performance dashboard</span>
+                            <i class="fas fa-brain"></i>
+                            <span>Reasoning &amp; inference</span>
                         </div>
                         <div class="gallery-item">
-                            <i class="fas fa-code-branch"></i>
-                            <span>Ingestion pipeline overview</span>
+                            <i class="fas fa-code"></i>
+                            <span>Structured JSON output</span>
                         </div>
                         <div class="gallery-item">
-                            <i class="fas fa-file-alt"></i>
-                            <span>Source citation &amp; confidence</span>
+                            <i class="fas fa-check-double"></i>
+                            <span>Constraint validation</span>
                         </div>
                     </div>
                 </div>
@@ -498,32 +565,31 @@
                         <div class="tech-list">
                             <span>Python</span>
                             <span>LangChain</span>
-                            <span>Pinecone</span>
-                            <span>FastAPI</span>
-                            <span>React</span>
-                            <span>Docker</span>
-                            <span>Redis</span>
                             <span>OpenAI</span>
+                            <span>RAG</span>
+                            <span>FastAPI</span>
+                            <span>Pydantic</span>
+                            <span>JSON Schema</span>
                         </div>
                     </div>
 
                     <div class="sidebar-card">
                         <h3><i class="fas fa-chart-simple"></i> metrics</h3>
                         <div class="stat-row">
-                            <span class="label">Documents indexed</span>
-                            <span class="value">12,400+</span>
+                            <span class="label">Schema accuracy</span>
+                            <span class="value">94 %</span>
                         </div>
                         <div class="stat-row">
-                            <span class="label">Avg. response time</span>
-                            <span class="value">1.8 s</span>
+                            <span class="label">Avg. generation time</span>
+                            <span class="value">2.3 s</span>
                         </div>
                         <div class="stat-row">
-                            <span class="label">Retrieval precision@5</span>
-                            <span class="value">92 %</span>
+                            <span class="label">Relationship inference</span>
+                            <span class="value">96 %</span>
                         </div>
                         <div class="stat-row">
-                            <span class="label">Daily queries</span>
-                            <span class="value">~ 850</span>
+                            <span class="label">Constraint detection</span>
+                            <span class="value">91 %</span>
                         </div>
                     </div>
 
@@ -555,7 +621,7 @@
         </span>
     </footer>
 
-    <!-- particles (same as index) -->
+    <!-- particles -->
     <script>
         (function() {
             const canvas = document.createElement('canvas');
