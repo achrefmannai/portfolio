@@ -1,0 +1,674 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Quote · Services — Neural Forge</title>
+    <!-- Fonts & Icons -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #0b0d10;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            color: #eef2f6;
+            line-height: 1.6;
+            overflow-x: hidden;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        /* glow & badges */
+        .glow-text {
+            background: linear-gradient(135deg, #a78bfa, #60a5fa, #34d399);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            display: inline-block;
+        }
+
+        .section-badge {
+            display: inline-block;
+            font-size: 0.75rem;
+            font-weight: 600;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: #94a3b8;
+            background: rgba(255, 255, 255, 0.04);
+            padding: 0.3rem 1rem;
+            border-radius: 100px;
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            margin-bottom: 1rem;
+        }
+
+        /* navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 50;
+            padding: 1rem 0;
+            background: rgba(11, 13, 16, 0.7);
+            backdrop-filter: blur(16px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+        }
+
+        .nav-inner {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-weight: 800;
+            font-size: 1.3rem;
+            letter-spacing: -0.03em;
+            background: linear-gradient(135deg, #c4b5fd, #818cf8);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-decoration: none;
+        }
+
+        .back-link {
+            color: #94a3b8;
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 500;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: color 0.2s;
+        }
+
+        .back-link:hover {
+            color: #a78bfa;
+        }
+
+        /* hero */
+        .quote-hero {
+            padding: 8rem 0 3rem;
+        }
+
+        .quote-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .quote-header h1 {
+            font-size: 3rem;
+            font-weight: 800;
+            letter-spacing: -0.03em;
+            line-height: 1.1;
+            margin-bottom: 0.5rem;
+        }
+
+        .quote-header p {
+            color: #94a3b8;
+            max-width: 500px;
+            margin: 0 auto;
+            font-size: 1.1rem;
+        }
+
+        /* table container */
+        .table-wrapper {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 28px;
+            overflow: hidden;
+            backdrop-filter: blur(4px);
+            margin-bottom: 3rem;
+        }
+
+        .quote-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.95rem;
+        }
+
+        .quote-table thead {
+            background: rgba(124, 58, 237, 0.08);
+            border-bottom: 2px solid rgba(124, 58, 237, 0.15);
+        }
+
+        .quote-table th {
+            text-align: left;
+            padding: 1.2rem 1.8rem;
+            font-weight: 700;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            color: #94a3b8;
+        }
+
+        .quote-table td {
+            padding: 1.2rem 1.8rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+            vertical-align: middle;
+        }
+
+        .quote-table tbody tr {
+            transition: background 0.2s;
+        }
+
+        .quote-table tbody tr:hover {
+            background: rgba(255, 255, 255, 0.03);
+        }
+
+        .quote-table tbody tr:last-child td {
+            border-bottom: none;
+        }
+
+        /* service icon & name */
+        .service-cell {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .service-icon {
+            width: 44px;
+            height: 44px;
+            border-radius: 12px;
+            background: rgba(124, 58, 237, 0.12);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            color: #a78bfa;
+            flex-shrink: 0;
+        }
+
+        .service-name {
+            font-weight: 600;
+            font-size: 1rem;
+        }
+
+        .service-desc {
+            color: #94a3b8;
+            font-size: 0.85rem;
+            display: block;
+            margin-top: 0.1rem;
+        }
+
+        /* tags in table */
+        .tag-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.4rem;
+        }
+
+        .tag-group span {
+            background: rgba(255, 255, 255, 0.04);
+            padding: 0.2rem 0.8rem;
+            border-radius: 40px;
+            font-size: 0.7rem;
+            font-weight: 500;
+            color: #94a3b8;
+            border: 1px solid rgba(255, 255, 255, 0.04);
+            letter-spacing: 0.02em;
+        }
+
+        .tag-group span.highlight {
+            background: rgba(124, 58, 237, 0.15);
+            color: #c4b5fd;
+            border-color: rgba(124, 58, 237, 0.2);
+        }
+
+        /* price & CTA */
+        .price-cell {
+            font-weight: 700;
+            font-size: 1.1rem;
+            color: #e2e8f0;
+            white-space: nowrap;
+        }
+
+        .price-cell small {
+            font-weight: 400;
+            font-size: 0.75rem;
+            color: #64748b;
+        }
+
+        .btn-quote {
+            background: linear-gradient(135deg, #7c3aed, #4f46e5);
+            border: none;
+            padding: 0.5rem 1.4rem;
+            border-radius: 60px;
+            font-weight: 600;
+            font-size: 0.8rem;
+            color: white;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            white-space: nowrap;
+        }
+
+        .btn-quote:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px -6px rgba(79, 70, 229, 0.4);
+        }
+
+        .btn-quote-outline {
+            background: transparent;
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            padding: 0.5rem 1.4rem;
+            border-radius: 60px;
+            font-weight: 600;
+            font-size: 0.8rem;
+            color: #e2e8f0;
+            cursor: pointer;
+            transition: background 0.2s;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            white-space: nowrap;
+        }
+
+        .btn-quote-outline:hover {
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        /* footer note */
+        .quote-footer {
+            text-align: center;
+            padding: 2rem 0 3rem;
+            color: #64748b;
+            font-size: 0.9rem;
+        }
+
+        .quote-footer a {
+            color: #a78bfa;
+            text-decoration: none;
+        }
+
+        .quote-footer a:hover {
+            color: #c4b5fd;
+        }
+
+        /* footer */
+        .footer {
+            padding: 2.5rem 0;
+            border-top: 1px solid rgba(255, 255, 255, 0.04);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+            color: #64748b;
+            font-size: 0.9rem;
+        }
+
+        /* responsive */
+        @media (max-width: 900px) {
+            .quote-table {
+                font-size: 0.85rem;
+            }
+            .quote-table th,
+            .quote-table td {
+                padding: 1rem 1.2rem;
+            }
+            .quote-header h1 {
+                font-size: 2.2rem;
+            }
+            .service-cell {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 0.4rem;
+            }
+            .service-icon {
+                width: 36px;
+                height: 36px;
+                font-size: 1rem;
+            }
+            .price-cell {
+                font-size: 1rem;
+            }
+        }
+
+        @media (max-width: 700px) {
+            .container {
+                padding: 0 1.2rem;
+            }
+
+            .quote-table thead {
+                display: none;
+            }
+
+            .quote-table,
+            .quote-table tbody,
+            .quote-table tr,
+            .quote-table td {
+                display: block;
+                width: 100%;
+            }
+
+            .quote-table tr {
+                margin-bottom: 1.5rem;
+                border: 1px solid rgba(255, 255, 255, 0.05);
+                border-radius: 18px;
+                padding: 1.2rem;
+                background: rgba(255, 255, 255, 0.01);
+            }
+
+            .quote-table td {
+                padding: 0.4rem 0;
+                border-bottom: none;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                flex-wrap: wrap;
+            }
+
+            .quote-table td::before {
+                content: attr(data-label);
+                font-weight: 600;
+                font-size: 0.7rem;
+                text-transform: uppercase;
+                letter-spacing: 0.05em;
+                color: #64748b;
+                min-width: 90px;
+            }
+
+            .quote-table td:last-child {
+                border-bottom: none;
+            }
+
+            .service-cell {
+                flex-direction: row;
+                align-items: center;
+                width: 100%;
+            }
+
+            .service-cell::before {
+                display: none;
+            }
+
+            .tag-group {
+                justify-content: flex-end;
+            }
+
+            .price-cell {
+                font-size: 1rem;
+            }
+
+            .btn-quote,
+            .btn-quote-outline {
+                font-size: 0.75rem;
+                padding: 0.4rem 1rem;
+            }
+        }
+
+        @media (max-width: 500px) {
+            .quote-header h1 {
+                font-size: 1.8rem;
+            }
+            .tag-group span {
+                font-size: 0.6rem;
+            }
+        }
+
+        ::selection {
+            background: #7c3aed;
+            color: white;
+        }
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #0b0d10;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #2d2f3a;
+            border-radius: 8px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #4f46e5;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- NAVIGATION -->
+    <nav>
+        <div class="container nav-inner">
+            <a href="index.html" class="logo">⚡ neural forge</a>
+            <a href="index.html#contact" class="back-link"><i class="fas fa-arrow-left"></i> back to home</a>
+        </div>
+    </nav>
+
+    <!-- QUOTE PAGE -->
+    <section class="quote-hero">
+        <div class="container">
+
+            <div class="quote-header">
+                <span class="section-badge"><i class="fas fa-file-invoice" style="margin-right: 6px;"></i> services &amp; pricing</span>
+                <h1>Request a <span class="glow-text">quote</span></h1>
+                <p>Tailored solutions for your next AI, software, or agentic project. Let's build something remarkable.</p>
+            </div>
+
+            <!-- TABLE -->
+            <div class="table-wrapper">
+                <table class="quote-table">
+                    <thead>
+                        <tr>
+                            <th style="width: 30%;">Service</th>
+                            <th style="width: 30%;">Stack / Expertise</th>
+                            <th style="width: 20%;">Starting from</th>
+                            <th style="width: 20%; text-align: right;">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- Software Engineering -->
+                        <tr>
+                            <td data-label="Service">
+                                <div class="service-cell">
+                                    <div class="service-icon"><i class="fas fa-code"></i></div>
+                                    <div>
+                                        <span class="service-name">Software Engineering</span>
+                                        <span class="service-desc">Full‑stack · APIs · Scalable backends</span>
+                                    </div>
+                                </div>
+                            </td>
+                            <td data-label="Stack">
+                                <div class="tag-group">
+                                    <span>Python</span>
+                                    <span>FastAPI</span>
+                                    <span>React</span>
+                                    <span>Docker</span>
+                                    <span>AWS</span>
+                                </div>
+                            </td>
+                            <td data-label="Starting from" class="price-cell">
+                                $5k <small>USD</small>
+                            </td>
+                            <td data-label="Action" style="text-align: right;">
+                                <a href="#" class="btn-quote"><i class="fas fa-paper-plane"></i> quote</a>
+                            </td>
+                        </tr>
+
+                        <!-- AI / ML -->
+                        <tr>
+                            <td data-label="Service">
+                                <div class="service-cell">
+                                    <div class="service-icon"><i class="fas fa-brain"></i></div>
+                                    <div>
+                                        <span class="service-name">AI / Machine Learning</span>
+                                        <span class="service-desc">LLMs · Fine‑tuning · RAG · Computer vision</span>
+                                    </div>
+                                </div>
+                            </td>
+                            <td data-label="Stack">
+                                <div class="tag-group">
+                                    <span class="highlight">PyTorch</span>
+                                    <span class="highlight">LangChain</span>
+                                    <span class="highlight">Transformers</span>
+                                    <span>Pinecone</span>
+                                    <span>GCP</span>
+                                </div>
+                            </td>
+                            <td data-label="Starting from" class="price-cell">
+                                $8k <small>USD</small>
+                            </td>
+                            <td data-label="Action" style="text-align: right;">
+                                <a href="#" class="btn-quote"><i class="fas fa-paper-plane"></i> quote</a>
+                            </td>
+                        </tr>
+
+                        <!-- Agentic AI -->
+                        <tr>
+                            <td data-label="Service">
+                                <div class="service-cell">
+                                    <div class="service-icon"><i class="fas fa-robot"></i></div>
+                                    <div>
+                                        <span class="service-name">Agentic AI</span>
+                                        <span class="service-desc">Autonomous agents · Multi‑agent systems · Tool calling</span>
+                                    </div>
+                                </div>
+                            </td>
+                            <td data-label="Stack">
+                                <div class="tag-group">
+                                    <span class="highlight">LangGraph</span>
+                                    <span class="highlight">OpenAI</span>
+                                    <span>AutoGen</span>
+                                    <span>Docker</span>
+                                    <span>Redis</span>
+                                </div>
+                            </td>
+                            <td data-label="Starting from" class="price-cell">
+                                $12k <small>USD</small>
+                            </td>
+                            <td data-label="Action" style="text-align: right;">
+                                <a href="#" class="btn-quote"><i class="fas fa-paper-plane"></i> quote</a>
+                            </td>
+                        </tr>
+
+                        <!-- Custom / Research -->
+                        <tr>
+                            <td data-label="Service">
+                                <div class="service-cell">
+                                    <div class="service-icon"><i class="fas fa-flask"></i></div>
+                                    <div>
+                                        <span class="service-name">Custom R&amp;D</span>
+                                        <span class="service-desc">Prototyping · PoC · Research collaboration</span>
+                                    </div>
+                                </div>
+                            </td>
+                            <td data-label="Stack">
+                                <div class="tag-group">
+                                    <span>Python</span>
+                                    <span>Jupyter</span>
+                                    <span>Ray</span>
+                                    <span>MLflow</span>
+                                    <span>Kubernetes</span>
+                                </div>
+                            </td>
+                            <td data-label="Starting from" class="price-cell">
+                                <span style="color: #94a3b8; font-weight: 400;">contact</span>
+                            </td>
+                            <td data-label="Action" style="text-align: right;">
+                                <a href="#" class="btn-quote-outline"><i class="fas fa-comment"></i> discuss</a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Footer note -->
+            <div class="quote-footer">
+                <p>
+                    <i class="fas fa-info-circle" style="color: #64748b; margin-right: 6px;"></i>
+                    All projects include discovery phase, documentation, and 30 days of post‑launch support.
+                    <br />
+                    <span style="font-size: 0.85rem; color: #64748b;">
+                        <i class="fas fa-envelope" style="margin-right: 4px;"></i>
+                        <a href="mailto:achref.mannai@etudiant-enit.utm.tn">achref.mannai@etudiant-enit.utm.tn</a>
+                        &nbsp;·&nbsp;
+                        <i class="fas fa-calendar-alt" style="margin-right: 4px;"></i>
+                        free 30‑min discovery call
+                    </span>
+                </p>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="container footer">
+        <span>© 2026 Neural Forge · built with <i class="fas fa-heart" style="color: #a78bfa; margin: 0 4px;"></i> for the future</span>
+        <span style="display: flex; gap: 1.5rem;">
+            <a href="#" style="color: #64748b; text-decoration: none;">imprint</a>
+            <a href="#" style="color: #64748b; text-decoration: none;">privacy</a>
+        </span>
+    </footer>
+
+    <!-- particles (same as index) -->
+    <script>
+        (function() {
+            const canvas = document.createElement('canvas');
+            canvas.style.position = 'fixed';
+            canvas.style.top = '0';
+            canvas.style.left = '0';
+            canvas.style.width = '100%';
+            canvas.style.height = '100%';
+            canvas.style.pointerEvents = 'none';
+            canvas.style.zIndex = '-1';
+            document.body.prepend(canvas);
+            const ctx = canvas.getContext('2d');
+
+            function resize() {
+                canvas.width = window.innerWidth;
+                canvas.height = window.innerHeight;
+            }
+            window.addEventListener('resize', resize);
+            resize();
+
+            const particles = [];
+            const count = 70;
+            for (let i = 0; i < count; i++) {
+                particles.push({
+                    x: Math.random() * canvas.width,
+                    y: Math.random() * canvas.height,
+                    r: Math.random() * 1.5 + 0.5,
+                    dx: (Math.random() - 0.5) * 0.3,
+                    dy: (Math.random() - 0.5) * 0.3,
+                });
+            }
+
+            function draw() {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                for (const p of particles) {
+                    ctx.beginPath();
+                    ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+                    ctx.fillStyle = 'rgba(167, 139, 250, 0.2)';
+                    ctx.fill();
+                    p.x += p.dx;
+                    p.y += p.dy;
+                    if (p.x < 0 || p.x > canvas.width) p.dx *= -1;
+                    if (p.y < 0 || p.y > canvas.height) p.dy *= -1;
+                }
+                requestAnimationFrame(draw);
+            }
+            draw();
+        })();
+    </script>
+
+</body>
+</html>
